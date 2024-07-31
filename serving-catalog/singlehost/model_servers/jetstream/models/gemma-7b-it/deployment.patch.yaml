@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gemma-7b-it-jetstream-inference-server
+  name: gemma-7b-it-jetstream-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gemma-7b-it-jetstream-inference-server
+  template:
+    metadata:
+      labels:
+        app: gemma-7b-it-jetstream-inference-server
+        ai.gke.io/model: gemma-1.1-7b-it
+    spec:
+      containers:
+      - name: inference-server
+        args:
+        - model_name=gemma-7b
+        - tokenizer_path=assets/tokenizer.gemma
+        - per_device_batch_size=4
+        - max_prefill_predict_length=1024
+        - max_target_length=2048
+        - async_checkpointing=false
+        - ici_fsdp_parallelism=1
+        - ici_autoregressive_parallelism=-1
+        - ici_tensor_parallelism=1
+        - scan_layers=false
+        - weight_dtype=bfloat16
+        - load_parameters_path=gs://$BUCKET_NAME/final/unscanned/gemma_7b-it/0/checkpoints/0/items
