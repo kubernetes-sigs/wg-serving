@@ -1,0 +1,14 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+
+components:
+  - ../../../components/policies/resources/gpu/1-L4
+
+patches:
+  - path: deployment.patch.yaml
+    target:
+      kind: Deployment
