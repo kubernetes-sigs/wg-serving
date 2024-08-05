@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: singlehost-inference-deployment-blueprint
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: singlehost-inference-server
+  template:
+    metadata:
+      labels:
+        app: singlehost-inference-server
+    spec:
+      containers:
+      - name: inference-server
