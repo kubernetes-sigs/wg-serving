@@ -17,12 +17,12 @@ The purpose of this catalog is to twofold:
 
 ## Principles
 
-Templatized so it is easy to parameterize. The catalog uses kustomize for that purpose.
-The catalog should include full working examples. An entry should include full deployment yaml and clear instructions on how to obtain the model server container and load the model, and optionally HPA and monitoring.
+- Templatized so it is easy to parameterize. The catalog uses kustomize for that purpose.
+- The catalog should include full working examples. An entry should include full deployment yaml and clear instructions on how to obtain the model server container and load the model, and optionally HPA and monitoring.
 
 
 **WARNING / STABILITY**
-This is not production ready and may change without notice. There is no api guarantee on these templates, structure or behavior, although we intend them to be correct.
+The catalog may change without notice. There is no api guarantee on these templates, structure or behavior, although we intend them to be correct.
 
 ## Contributions
 
