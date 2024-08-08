@@ -2,6 +2,20 @@
 
 This repository is a catalog of Kustomize templated yamls for deploying inference workloads.
 
+## Context
+
+The intention of the serving-catalog is:
+
+    - Crowdsource known working configurations for serving LLM/GenAI on K8s.
+    - Reduce barrier to entry and serve as reference configurations for production deployments.
+    - Help identify similarities and differences between frameworks, model servers, and providers used in LLM serving to inform future upstream K8s changes.
+
+## Contributions
+
+All known working configurations are welcome. New top level directories should be created under serving-catalog for new frameworks. The core directory is meant to house examples using minimal k8s based mechanism.
+
+It is recommended to follow the kustomize base/overlay structure `serving-catalog/{platform}/{crd}/{model_server}/{model}/{provider}` shown in core. Provider specific references should be placed in provider specific directories. Components can be used to share common configurations across overlays.
+
 ## Information and Usage
 
 Kustomize overlays and components are leveraged to share common configurations across deployment paradigms, model servers, and models. The directory structure reflects this hierarchy:
@@ -22,6 +36,8 @@ serving-catalog/
 │   │   ├── jetstream
 │   │   │   ├── base
 │   │   │   └── gemma-7b-it
+│   │   │       ├── base
+│   │   │       └── gke
 │   │   └── vllm
 │   │       ├── base
 │   │       └── gemma-2b
