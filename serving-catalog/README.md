@@ -22,27 +22,27 @@ Kustomize overlays and components are leveraged to share common configurations a
 
 ```
 serving-catalog/
-├── core
-│   ├── deployment
-│   │   ├── base
-│   │   ├── components
-│   │   │   └── policies
-│   │   │       └── resources
-│   │   │           ├── gpu
-│   │   │           │   ├── 1-L4
-│   │   │           │   └── 2-L4
-│   │   │           └── tpu
-│   │   │               └── v5e-2x4
-│   │   ├── jetstream
-│   │   │   ├── base
-│   │   │   └── gemma-7b-it
-│   │   │       ├── base
-│   │   │       └── gke
-│   │   └── vllm
-│   │       ├── base
-│   │       └── gemma-2b
-│   │           ├── base
-│   │           └── gke
+└── core
+    ├── deployment
+    │   ├── base
+    │   ├── components
+    │   │   └── gke
+    │   │       └── resources
+    │   │           ├── gpu
+    │   │           │   ├── 1-L4
+    │   │           │   └── 2-L4
+    │   │           └── tpu
+    │   │               └── v5e-2x4
+    │   ├── jetstream
+    │   │   ├── base
+    │   │   └── gemma-7b-it
+    │   │       ├── base
+    │   │       └── gke
+    │   └── vllm
+    │       ├── base
+    │       └── gemma-2b
+    │           ├── base
+    │           └── gke
 ```
 
 Where an inference deployment can be deployed using a command like:
