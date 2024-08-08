@@ -6,7 +6,7 @@ resources:
   - ../base
 
 components:
-  - ../../../components/policies/resources/gpu/1-L4
+  - ../../../components/gke/resources/gpu/1-L4
 
 patches:
   - path: deployment.patch.yaml
