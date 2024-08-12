@@ -72,3 +72,10 @@ kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --sel
 kubectl wait --for=condition=complete --timeout=1000s job/gemma-7b-it-jetstream-data-loader &&
 kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --selector app=gemma-7b-it-jetstream-inference-server
 ```
+
+## Contents
+
+| Kind | Model Server | Model | Provider | README Link |
+| --- | --- | --- | --- | --- |
+| Deployment | vLLM | gemma-2b | GKE | [README](./core/deployment/vllm/gemma-2b/gke/README.md) |
+| Deployment | JetStream | gemma-7b-it | GKE | [README](./core/deployment/jetstream/gemma-7b-it/gke/README.md) |

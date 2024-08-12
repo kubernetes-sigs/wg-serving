@@ -1,3 +1,11 @@
+# Gemma-7b-it
+
+## Configuration
+| Kind | Model Server | Model | Provider | Accelerator |
+| --- | --- | --- | --- | --- |
+| Deployment | JetStream | gemma-7b-it | GKE | TPU v5e 2x4 |
+
+## Usage
 $BUCKET_NAME must be replaced in `job-patch.yaml` and `patch.yaml`
 
 The example can be deployed by issuing the commands:
