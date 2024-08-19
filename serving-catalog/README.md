@@ -65,10 +65,14 @@ Where an inference deployment can be deployed using a command like:
 kustomize build core/deployment/vllm/gemma-2b | kubectl apply -f -
 ```
 
-For models and model servers that require a model load stage, these commands kustomize and deploys a Job, waits for it to complete and then deploys the inference server.
+For models and model servers that require a model load stage, these commands kustomize and deploy a Job, waits for it to complete and then deploys the inference server.
 
 ```
 kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --selector prerequisite=model-load &&
 kubectl wait --for=condition=complete --timeout=1000s job/gemma-7b-it-jetstream-data-loader &&
 kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --selector app=gemma-7b-it-jetstream-inference-server
 ```
+
+## Contents
+
+A table of configurations in this repository are available in [catalog.md](./catalog.md).
