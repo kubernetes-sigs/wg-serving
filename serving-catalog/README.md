@@ -1,6 +1,10 @@
-# serving-catalog
+# Serving Catalog
 
 This repository is a catalog of Kustomize templated yamls for deploying inference workloads.
+
+## Contents
+
+A table of configurations in this repository are available in [catalog.md](./catalog.md).
 
 ## Purpose
 
@@ -72,7 +76,3 @@ kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --sel
 kubectl wait --for=condition=complete --timeout=1000s job/gemma-7b-it-jetstream-data-loader &&
 kustomize build core/deployment/jetstream/gemma-7b-it | kubectl apply -f - --selector app=gemma-7b-it-jetstream-inference-server
 ```
-
-## Contents
-
-A table of configurations in this repository are available in [catalog.md](./catalog.md).
