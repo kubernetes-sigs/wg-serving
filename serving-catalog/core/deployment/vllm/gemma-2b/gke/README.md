@@ -10,5 +10,5 @@
 The template can be deployed with the following commands:
 
 ```
-kustomize build core/deployment/jetstream/gemma-7b-it/gke | kubectl apply -f -
+kustomize build core/deployment/vllm/gemma-2b/gke | kubectl apply -f -
 ```
