@@ -61,9 +61,9 @@ serving-catalog/
 │   │       └── gemma-2b
 │   │           ├── base
 │   │           └── gke
-├── kserve
-│   ├── inferenceservice
-│   └── servingruntime
+└── kserve
+    ├── inferenceservice
+    └── servingruntime
 ```
 
 Where an inference deployment can be deployed using a command like:
