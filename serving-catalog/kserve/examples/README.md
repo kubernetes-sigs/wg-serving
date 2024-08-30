@@ -1,6 +1,14 @@
-# KServe Serving Runtimes
+# Running a example with KServe
 
-This directory contains the list of KServe serving runtimes that can be deployed via [KServe InferenceServices](./inferenceservice).
+Navigate to the desired example To run the examples, and apply the resources using the `kubectl apply` command.:
+
+```shell
+cd serving-catalog/kserve/examples/<example>
+kubectl apply -k  .
+```
+
+
+# KServe Serving Runtimes
 
 The examples available here will contain the default KServe Serving Runtimes, as follows:
 
