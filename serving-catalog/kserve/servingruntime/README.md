@@ -2,7 +2,7 @@
 
 This directory contains the list of KServe serving runtimes that can be deployed via [KServe InferenceServices](./inferenceservice).
 
-The examples avaialble here will contain the default KServe Serving Runtimes, as follows:
+The examples available here will contain the default KServe Serving Runtimes, as follows:
 
 - **[huggingfaceserver](huggingfaceserver-serving-runtime.yaml)**: A serving runtime for Hugging Face models, supporting 
 transformer-based models for tasks like text classification, translation, and more, few examples of supported models:
