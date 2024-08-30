@@ -3,7 +3,7 @@
 For the KServe examples exposed in this Serving Catalog, we will focus on the simplicity and detachment of most of the
 underlying infrastructure. This will allow us to focus on the pure Serving aspect of the examples. 
 
-The `RawDeployment` method will be used to deploy the models. This method is the simplest way to deploy a model which \n 
+The `RawDeployment` method will be used to deploy the models. This method is the simplest way to deploy a model which
 does not have any dependency, like the `Serveless` method, which depends on Istio and Knative.
 
 For more information about `RawDeployment` and other deployment methods, please refer to the [KServe documentation](https://kserve.github.io/website/latest/admin/kubernetes_deployment/).
