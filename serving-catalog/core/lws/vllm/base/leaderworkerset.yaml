@@ -1,0 +1,100 @@
+apiVersion: leaderworkerset.x-k8s.io/v1
+kind: LeaderWorkerSet
+metadata:
+  name: vllm-multihost-base
+spec:
+  leaderWorkerTemplate:
+    restartPolicy: RecreateGroupOnPodRestart
+    leaderTemplate:
+      spec:
+        containers:
+          - name: inference-server-leader
+            image: vllm/vllm-openai:latest
+            command:
+            - /scripts/entrypoint.sh
+            args: ["--head"]
+            env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secret
+                  key: hf_api_token
+            - name: MODEL_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: model_id
+            - name: TENSOR_PARALLEL_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: tensor_parallel_size
+            - name: PIPELINE_PARALLEL_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: pipeline_parallel_size
+            volumeMounts:
+            - mountPath: "/scripts"
+              name: scripts-volume
+              readOnly: true
+            - mountPath: /dev/shm
+              name: dshm
+            ports:
+              - containerPort: 8080
+        volumes:
+        - name: scripts-volume
+          configMap:
+            defaultMode: 0700
+            name: vllm-multihost-config
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 30Gi
+    workerTemplate:
+      spec:
+        initContainers:
+        - name: ray-head-check
+          image: vllm/vllm-openai:latest
+          command:
+          - /scripts/ray_status_check.sh
+          volumeMounts:
+            - mountPath: "/scripts"
+              name: scripts-volume
+              readOnly: true
+        containers:
+          - name: inference-server-worker
+            image: vllm/vllm-openai:latest
+            command:
+            - /scripts/entrypoint.sh
+            env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secret
+                  key: hf_api_token
+            - name: MODEL_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: model_id
+            - name: TENSOR_PARALLEL_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: tensor_parallel_size
+            volumeMounts:
+            - mountPath: "/scripts"
+              name: scripts-volume
+              readOnly: true
+            - mountPath: /dev/shm
+              name: dshm
+        volumes:
+        - name: scripts-volume
+          configMap:
+            defaultMode: 0700
+            name: vllm-multihost-config
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 30Gi

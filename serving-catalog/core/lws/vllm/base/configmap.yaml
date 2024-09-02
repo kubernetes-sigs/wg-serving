@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vllm-multihost-config
+data:
+  ray_status_check.sh: |-
+    #!/usr/bin/bash -x
+    # Verify ray head status
+    until ray status --address $LWS_LEADER_ADDRESS:6380; do
+      sleep 5;
+    done
+  entrypoint.sh: |-
+    #!/usr/bin/bash -x
+    # Launch vLLM Inference server
+
+    export PYTHONPATH="/workspace/"
+    if [[ -n "$1" ]]; then
+      ray start --head --port=6380
+      num_accelerators=`python3 -c 'import ray; ray.init(); print(int(sum([ray.cluster_resources().get("GPU", 0), ray.cluster_resources().get("TPU", 0)])))'`
+      total_accelerators=$(($TENSOR_PARALLEL_SIZE * $PIPELINE_PARALLEL_SIZE ))
+      until [ $num_accelerators -eq $total_accelerators ]; do
+        num_accelerators=`python3 -c 'import ray; ray.init(); print(int(sum([ray.cluster_resources().get("GPU", 0), ray.cluster_resources().get("TPU", 0)])))'`
+        sleep 5
+      done
+      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $MODEL_ID --tensor_parallel_size $TENSOR_PARALLEL_SIZE --pipeline_parallel_size $PIPELINE_PARALLEL_SIZE
+    else
+      until ray start --address="$LWS_LEADER_ADDRESS":6380 --block; do
+        sleep 5
+      done
+    fi
+    
