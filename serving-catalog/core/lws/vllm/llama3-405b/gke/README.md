@@ -1,4 +1,4 @@
-# Gemma-2b
+# Llama3.1-405b
 
 ## Configuration
 | Kind | Model Server | Model | Provider | Accelerator |
