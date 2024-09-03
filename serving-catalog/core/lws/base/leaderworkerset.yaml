@@ -9,6 +9,7 @@ spec:
       metadata:
         labels:
           app: multihost-inference-server
+          role: leader
       spec:
         containers:
           - name: multihost-leader-base
