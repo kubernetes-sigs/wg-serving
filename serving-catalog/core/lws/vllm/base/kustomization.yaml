@@ -8,6 +8,6 @@ resources:
 - configmap.yaml
 
 patches:
-  - path: leaderworkerset.yaml
+  - path: leaderworkerset.patch.yaml
     target:
       kind: LeaderWorkerSet

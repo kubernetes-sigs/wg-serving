@@ -24,16 +24,8 @@ spec:
                 configMapKeyRef:
                   name: vllm-multihost-config
                   key: model_id
-            - name: TENSOR_PARALLEL_SIZE
-              valueFrom:
-                configMapKeyRef:
-                  name: vllm-multihost-config
-                  key: tensor_parallel_size
             - name: PIPELINE_PARALLEL_SIZE
-              valueFrom:
-                configMapKeyRef:
-                  name: vllm-multihost-config
-                  key: pipeline_parallel_size
+              value: $(LWS_GROUP_SIZE)
             volumeMounts:
             - mountPath: "/scripts"
               name: scripts-volume
@@ -73,16 +65,6 @@ spec:
                 secretKeyRef:
                   name: hf-secret
                   key: hf_api_token
-            - name: MODEL_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: vllm-multihost-config
-                  key: model_id
-            - name: TENSOR_PARALLEL_SIZE
-              valueFrom:
-                configMapKeyRef:
-                  name: vllm-multihost-config
-                  key: tensor_parallel_size
             volumeMounts:
             - mountPath: "/scripts"
               name: scripts-volume

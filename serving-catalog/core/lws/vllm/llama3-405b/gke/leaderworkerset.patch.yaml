@@ -9,7 +9,9 @@ spec:
       metadata:
         labels:
           ai.gke.io/model: llama3-405b
+          examples.ai.gke.io/source: blueprints
     workerTemplate:
       metadata:
         labels:
           ai.gke.io/model: llama3-405b
+          examples.ai.gke.io/source: blueprints
