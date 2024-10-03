@@ -7,6 +7,7 @@ resources:
 
 components:
   - ../../../components/gke/resources/tpu/v5e-2x4
+  # - ../../../components/hpa/jetstream/token-latency # HPA is a work-in-progress
 
 patches:
   - path: deployment.patch.yaml
@@ -15,3 +16,8 @@ patches:
   - path: job.patch.yaml
     target:
       kind: Job
+  - options:
+      allowNameChange: true
+    path: hpa.patch.yaml
+    target:
+      kind: HorizontalPodAutoscaler
