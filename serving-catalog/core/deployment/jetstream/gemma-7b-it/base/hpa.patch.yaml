@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: gemma-7b-it-jetstream-inference-server
+  name: gemma-7b-it-jetstream-hpa
