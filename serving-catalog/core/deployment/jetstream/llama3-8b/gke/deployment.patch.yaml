@@ -7,7 +7,7 @@ spec:
     metadata:
       labels:
         ai.gke.io/model: LLaMA3_8B
-        ai.gke.io/inference-server: vllm
+        ai.gke.io/inference-server: jetstream
         examples.ai.gke.io/source: blueprints
       annotations:
         gke-gcsfuse/volumes: "true"
