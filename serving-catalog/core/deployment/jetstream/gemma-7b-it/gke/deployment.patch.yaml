@@ -7,5 +7,5 @@ spec:
     metadata:
       labels:
         ai.gke.io/model: gemma-7b-it
-        ai.gke.io/inference-server: vllm
+        ai.gke.io/inference-server: jetstream
         examples.ai.gke.io/source: blueprints
