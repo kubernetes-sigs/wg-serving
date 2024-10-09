@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: gemma-2b-vllm-inference-server
+  name: gemma-2b-vllm-hpa

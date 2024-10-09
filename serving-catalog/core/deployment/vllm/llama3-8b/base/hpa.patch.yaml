@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: llama3-8b-vllm-inference-server
+  name: llama3-8b-vllm-hpa

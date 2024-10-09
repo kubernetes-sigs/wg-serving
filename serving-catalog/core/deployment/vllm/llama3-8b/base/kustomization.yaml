@@ -11,6 +11,12 @@ patches:
   path: deployment.patch.yaml
   target:
     kind: Deployment
+# HPA is still a work-in-progress
+# - options:
+#     allowNameChange: true
+#   path: hpa.patch.yaml
+#   target:
+#     kind: HorizontalPodAutoscaler
 - options:
     allowNameChange: true
   path: service.patch.yaml

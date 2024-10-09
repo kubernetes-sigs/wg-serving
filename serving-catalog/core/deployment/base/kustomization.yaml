@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
 - deployment.yaml
+# - hpa.yaml # HPA is still a work-in-progress
