@@ -15,6 +15,9 @@ spec:
       - name: inference-server
         image: vllm/vllm-openai:latest
         command: ["python3", "-m", "vllm.entrypoints.openai.api_server"]
+        ports:
+          - containerPort: 8000
+            name: metrics
         args:
         - --model=$(MODEL_ID)
         env:
