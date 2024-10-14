@@ -14,7 +14,7 @@ spec:
       containers:
       - name: inference-server
         image: vllm/vllm-openai:latest
-        command: ["python3", "-m", "vllm.entrypoints.api_server"]
+        command: ["python3", "-m", "vllm.entrypoints.openai.api_server"]
         args:
         - --model=$(MODEL_ID)
         env:
