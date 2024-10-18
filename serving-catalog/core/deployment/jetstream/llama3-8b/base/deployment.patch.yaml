@@ -16,6 +16,9 @@ spec:
       containers:
       - name: inference-server
         image: us-docker.pkg.dev/cloud-tpu-images/inference/jetstream-pytorch-server:v0.2.3
+        ports:
+          - containerPort: 9100
+            name: metrics
         args:
         - --size=8b
         - --model_name=llama-3
@@ -25,3 +28,4 @@ spec:
         - --quantize_kv_cache=False
         - --tokenizer_path=/models/pytorch/llama3-8b/final/bf16/tokenizer.model
         - --checkpoint_path=/models/pytorch/llama3-8b/final/bf16/model.safetensors
+        - --prometheus_port=9100
