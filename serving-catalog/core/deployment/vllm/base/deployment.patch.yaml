@@ -29,6 +29,12 @@ spec:
         volumeMounts:
         - mountPath: /dev/shm
           name: dshm
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          failureThreshold: 60
+          periodSeconds: 10
       volumes:
       - name: dshm
         emptyDir:
