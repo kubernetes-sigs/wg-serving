@@ -15,6 +15,9 @@ spec:
     spec:
       containers:
       - name: inference-server
+        ports:
+          - containerPort: 9100
+            name: metrics
         args:
         - model_name=gemma-7b
         - tokenizer_path=assets/tokenizer.gemma
@@ -28,3 +31,4 @@ spec:
         - scan_layers=false
         - weight_dtype=bfloat16
         - load_parameters_path=gs://$BUCKET_NAME/final/unscanned/gemma_7b-it/0/checkpoints/0/items
+        - prometheus_port=9100
