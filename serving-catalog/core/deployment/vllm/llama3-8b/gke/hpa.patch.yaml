@@ -1,0 +1,17 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: llama3-8b-vllm-inference-server
+  name: llama3-8b-vllm-hpa
+spec:
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: vllm-token-latency-ms
+      target:
+        type: AverageValue
+        averageValue: 50
