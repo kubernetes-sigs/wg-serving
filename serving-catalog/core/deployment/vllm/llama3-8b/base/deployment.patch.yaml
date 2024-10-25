@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: llama3-8b-vllm-inference-server
+    app: llama3-8b-vllm-inference-server
   name: llama3-8b-vllm-deployment
 spec:
   selector:
