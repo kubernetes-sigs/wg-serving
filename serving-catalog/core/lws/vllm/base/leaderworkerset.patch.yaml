@@ -32,8 +32,15 @@ spec:
               readOnly: true
             - mountPath: /dev/shm
               name: dshm
+            readinessProbe:
+              httpGet:
+                path: /health
+                port: 8000
+              failureThreshold: 60
+              periodSeconds: 10
             ports:
               - containerPort: 8080
+                name: metrics
         volumes:
         - name: scripts-volume
           configMap:
