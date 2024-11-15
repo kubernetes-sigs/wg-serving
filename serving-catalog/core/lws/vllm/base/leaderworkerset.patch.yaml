@@ -33,11 +33,11 @@ spec:
             - mountPath: /dev/shm
               name: dshm
             readinessProbe:
-              httpGet:
-                path: /health
-                port: 8000
-              failureThreshold: 60
+              tcpSocket:
+                port: 8080
+              initialDelaySeconds: 15
               periodSeconds: 10
+              failureThreshold: 60
             ports:
               - containerPort: 8080
                 name: metrics
