@@ -19,7 +19,7 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: llama3-405b-vllm-service
+        value: llama3-1-405b-vllm-service
 
 configMapGenerator:
 - name: vllm-multihost-config
