@@ -367,6 +367,7 @@ benchmarking tool.
     *   Requests / second
 *   Latency at different percentiles (mean, median, p90, p99)
     *   Time per output token (TPOT)
+    *   Inter-token latency (ITL)
     *   Time to first token (TTFT)
     *   Time per request
 
