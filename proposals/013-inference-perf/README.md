@@ -324,9 +324,9 @@ output and the vice versa). This allows us to support different GenAI use cases
 like chat completion, summarization, code completion, etc. depending on the
 dataset and the benchmarking user’s inputs.
 
-#### LoadGen
+#### Load Generator
 
-LoadGenerator is the component which generates different traffic patterns based
+Load Generator is the component which generates different traffic patterns based
 on user input. This can include a fixed RPS test for a predetermined amount of
 time or include a way to generate bursts in traffic or other traffic patterns as
 desired for autoscaling and other use cases.
@@ -370,15 +370,18 @@ benchmarking tool.
     *   Inter-token latency (ITL)
     *   Time to first token (TTFT)
     *   Time per request
+*   Request metrics (mean, median, p90, p99)
+    *   Prompt tokens
+    *   Output tokens
 
 Optionally we also want to collect specific accelerator and model server metrics.
 
-*   Accelerator metrics
+*   Accelerator metrics (mean, median, p90, p99)
     *   Accelerator utilization (duty cycle)
     *   Accelerator memory utilization
     *   Accelerator memory bandwidth utilization
     *   Accelerator power usage
-*   Model server metrics
+*   Model server metrics (mean, median, p90, p99)
     *   Batch size
     *   Queue size
     *   KV cache usage
