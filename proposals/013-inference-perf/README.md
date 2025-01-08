@@ -55,6 +55,8 @@ provide a black box tool.
 GenAI workloads require specific things like token level metrics for LLMs,
 streaming support for long running requests, etc. and keeping the tool focussed
 on it helps keep it simple and makes it easier to use as well as useful.
+3. Compare different model servers' performance and make recommendations for
+any model server or hosted offering.
 
 ## Evaluation of Existing Tools
 
