@@ -61,9 +61,10 @@ serving-catalog/
 │   │       └── gemma-2b
 │   │           ├── base
 │   │           └── gke
-├── kserve
-│   ├── inferenceservice
-│   └── servingruntime
+└── kserve
+    └── examples
+       └── sklearn-iris
+       └── vllm
 ```
 
 Where an inference deployment can be deployed using a command like:
