@@ -1,0 +1,50 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# User-specific files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Compiled source
+*.class
+*.war
+*.ear
+
+# Generated files
+*.jar
+*.dll
+*.exe
+*.o
+*.pyc
+*.pyo
+*.pyd
+*.pid
+*.gz
+*.out
+*.log
+
+# Directories
+bin/
+gen/
+out/
+target/
+build/
+dist/
+node_modules/
+coverage/
+.idea/
+.vscode/
