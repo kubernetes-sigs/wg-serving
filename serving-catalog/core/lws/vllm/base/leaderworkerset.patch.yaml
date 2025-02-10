@@ -26,6 +26,11 @@ spec:
                   key: model_id
             - name: PIPELINE_PARALLEL_SIZE
               value: $(LWS_GROUP_SIZE)
+            - name: MAX_MODEL_LEN
+              valueFrom:
+                configMapKeyRef:
+                  name: vllm-multihost-config
+                  key: max_model_len  
             volumeMounts:
             - mountPath: "/scripts"
               name: scripts-volume
