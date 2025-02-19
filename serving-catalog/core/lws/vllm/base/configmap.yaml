@@ -22,7 +22,7 @@ data:
         num_accelerators=`python3 -c 'import ray; ray.init(); print(int(sum([ray.cluster_resources().get("GPU", 0), ray.cluster_resources().get("TPU", 0)])))'`
         sleep 5
       done
-      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $MODEL_ID --tensor_parallel_size $TENSOR_PARALLEL_SIZE --pipeline_parallel_size $PIPELINE_PARALLEL_SIZE
+      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $MODEL_ID --tensor_parallel_size $TENSOR_PARALLEL_SIZE --pipeline_parallel_size $PIPELINE_PARALLEL_SIZE --trust_remote_code --max-model-len $MAX_MODEL_LEN
     else
       until ray start --address="$LWS_LEADER_ADDRESS":6380 --block; do
         sleep 5
