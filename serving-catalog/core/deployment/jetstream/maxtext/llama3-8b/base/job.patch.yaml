@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Job
+metadata:
+  name: llama3-8b-jetstream-data-loader
+  labels:
+    app: llama3-8b-jetstream-data-loader
+spec:
+  template:
+    metadata:
+      labels:
+        app: llama3-8b-jetstream-data-loader
+    spec:
+      containers:
+      - name: inference-checkpoint
+        image: us-docker.pkg.dev/cloud-tpu-images/inference/inference-checkpoint:v0.2.5
+        imagePullPolicy: Always
+        args:
+        - --inference_server=jetstream-maxtext
+        - --model_path=Llama3.1-8B-Instruct
+        - --output_directory=gs://$BUCKET_NAME/maxtext/llama3-8b/final/bf16/
+        - --model_name=llama-3
+        - --huggingface=False
+        - --bucket_name=$BUCKET_NAME
+        - --meta_url=$META_URL
+      nodeSelector:
+        cloud.google.com/gke-tpu-accelerator: tpu-v5-lite-podslice
+        cloud.google.com/gke-tpu-topology: 2x4 
+
