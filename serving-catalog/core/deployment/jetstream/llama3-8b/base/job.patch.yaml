@@ -24,8 +24,15 @@ spec:
         - mountPath: "/huggingface/"
           name: huggingface-credentials
           readOnly: true
+        - mountPath: "/kaggle/"
+          name: kaggle-credentials
+          readOnly: true
       volumes:
         - name: huggingface-credentials
           secret:
             defaultMode: 0400
             secretName: huggingface-secret
+        - name: kaggle-credentials
+          secret:
+            defaultMode: 0400
+            secretName: kaggle-secret
