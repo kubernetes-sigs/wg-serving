@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    spec:
+      containers:
+      - name: inference-server
+        env:
+        - name: MODEL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: model-config
+              key: MODEL_PATH
+        args:
+        - --model=/data/$(MODEL_PATH)
+        volumeMounts:
+        - name: model-data
+          mountPath: /data
+      volumes:
+      - name: model-data
+        persistentVolumeClaim:
+          claimName: PVC_NAME
+        
