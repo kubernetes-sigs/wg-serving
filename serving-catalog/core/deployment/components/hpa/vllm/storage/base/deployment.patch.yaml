@@ -9,10 +9,7 @@ spec:
       - name: inference-server
         env:
         - name: MODEL_PATH
-          valueFrom:
-            configMapKeyRef:
-              name: model-config
-              key: MODEL_PATH
+          value: path/to/model
         args:
         - --model=/data/$(MODEL_PATH)
         volumeMounts:
