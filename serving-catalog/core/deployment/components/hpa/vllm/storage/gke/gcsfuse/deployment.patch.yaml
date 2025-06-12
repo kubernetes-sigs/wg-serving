@@ -12,13 +12,6 @@ spec:
         gke-gcsfuse/memory-limit: "0"
         gke-gcsfuse/ephemeral-storage-limit: "0"
     spec:
-      containers:
-      - name: inference-server
-        env:
-          - name: MODEL_PATH
-            value: path/to/model
-            valueFrom:
-              $patch: delete
       volumes:
       - name: gke-gcsfuse-cache
         emptyDir:
