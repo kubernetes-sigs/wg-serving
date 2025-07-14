@@ -11,6 +11,12 @@ patches:
   - patch: |-
       - op: add
         path: /spec/template/spec/containers/0/args/-
-        value: --model=/data/$(MODEL_PATH)
+        value: --model=/data/models/$(MODEL_PATH)
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --download-dir=/data/models
     target:
       kind: Deployment

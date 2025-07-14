@@ -8,7 +8,6 @@ spec:
       annotations:
         gke-gcsfuse/volumes: "true"
         gke-gcsfuse/cpu-limit: "0"
-        gke-gcsfuse/memory-request: "0"
         gke-gcsfuse/memory-limit: "0"
         gke-gcsfuse/ephemeral-storage-limit: "0"
     spec:

@@ -10,9 +10,13 @@ spec:
         env:
         - name: MODEL_PATH
           value: path/to/model
+        - name: VLLM_CACHE_ROOT
+          value: "/data"
+        - name: VLLM_USE_V1
+          value: "1"
         volumeMounts:
         - name: model-data
-          mountPath: /data
+          mountPath: /data/models
       volumes:
       - name: model-data
         persistentVolumeClaim:
