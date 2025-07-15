@@ -21,4 +21,4 @@ patches:
       path: /spec/template/spec/containers/0/args/-
       value: --tensor-parallel-size=1
   target:
-    kind: deployment
+    kind: Deployment
