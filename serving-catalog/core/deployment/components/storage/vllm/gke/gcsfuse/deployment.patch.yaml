@@ -12,7 +12,7 @@ spec:
         gke-gcsfuse/ephemeral-storage-limit: "0"
     spec:
       nodeSelector:
-        cloud.google.com/gke-local-ssd: "true"
+        cloud.google.com/gke-ephemeral-storage-local-ssd: "true"
       volumes:
       - name: gke-gcsfuse-cache
         emptyDir:
