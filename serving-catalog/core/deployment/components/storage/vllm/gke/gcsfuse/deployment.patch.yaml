@@ -10,9 +10,4 @@ spec:
         gke-gcsfuse/cpu-limit: "0"
         gke-gcsfuse/memory-limit: "0"
         gke-gcsfuse/ephemeral-storage-limit: "0"
-    spec:
-      volumes:
-      - name: gke-gcsfuse-cache
-        emptyDir:
-          medium: Memory
         
