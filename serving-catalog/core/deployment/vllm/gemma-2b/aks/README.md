@@ -3,7 +3,7 @@
 ## Configuration
 | Kind | Model Server | Model | Provider | Accelerator |
 | --- | --- | --- | --- | --- |
-| Deployment | vLLM | gemma-2b | GKE | GPU L4 |
+| Deployment | vLLM | gemma-2b | AKS | GPU V100 |
 
 ## Usage
 
