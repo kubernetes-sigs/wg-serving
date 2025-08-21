@@ -6,7 +6,7 @@ resources:
   - ../base
 
 components:
-  - ../../../components/aks/resources/gpu/1-L4
+  - ../../../components/aks/resources/gpu/1-V100
 
 patches:
   - path: deployment.patch.yaml
