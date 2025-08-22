@@ -9,8 +9,8 @@ spec:
         kubernetes.azure.com/accelerator: nvidia
       containers:
       - name: inference-server
-        # resources:
-        #   requests:
-        #     nvidia.com/gpu: 1
-        #   limits:
-        #     nvidia.com/gpu: 1
+        resources:
+          requests:
+            nvidia.com/gpu: 1
+          limits:
+            nvidia.com/gpu: 1
