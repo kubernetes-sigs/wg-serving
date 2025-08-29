@@ -7,7 +7,6 @@ spec:
     spec:
       nodeSelector:
         cloud.google.com/gke-accelerator: nvidia-h100-80gb
-        cloud.google.com/compute-class: "Accelerator"
       containers:
       - name: inference-server
         resources:
