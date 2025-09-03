@@ -12,6 +12,8 @@ spec:
           value: path/to/model
         - name: VLLM_CACHE_ROOT
           value: "/data"
+        - name: VLLM_XLA_CACHE_PATH
+          value: "/data"
         - name: VLLM_USE_V1
           value: "1"
         volumeMounts:
