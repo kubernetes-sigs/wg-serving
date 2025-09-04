@@ -1,0 +1,10 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+patches:
+  - path: v6e-1x1.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
