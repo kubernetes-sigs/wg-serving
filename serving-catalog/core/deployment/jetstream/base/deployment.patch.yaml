@@ -7,10 +7,12 @@ spec:
   selector:
     matchLabels:
       app: maxengine-server
+      deployment: maxengine-server
   template:
     metadata:
       labels:
         app: maxengine-server
+        deployment: maxengine-server
     spec:
       containers:
       - name: inference-server

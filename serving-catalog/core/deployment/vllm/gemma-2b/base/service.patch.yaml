@@ -7,3 +7,4 @@ metadata:
 spec:
   selector:
     app: gemma-2b-vllm-inference-server
+    deployment: gemma-2b-vllm-deployment

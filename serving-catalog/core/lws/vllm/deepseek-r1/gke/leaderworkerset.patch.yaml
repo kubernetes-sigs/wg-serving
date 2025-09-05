@@ -10,6 +10,8 @@ spec:
         labels:
           ai.gke.io/model: deepseek-r1
           examples.ai.gke.io/source: blueprints
+          role: leader
+          deployment: vllm-multihost-base
     workerTemplate:
       metadata:
         labels:

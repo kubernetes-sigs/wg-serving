@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: maxengine-server
+    deployment: maxengine-server
   ports:
   - protocol: TCP
     name: jetstream-http

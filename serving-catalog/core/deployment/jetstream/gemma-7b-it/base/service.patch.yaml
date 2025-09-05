@@ -7,3 +7,4 @@ metadata:
 spec:
   selector:
     app: gemma-7b-it-jetstream-inference-server
+    deployment: gemma-7b-it-jetstream-deployment

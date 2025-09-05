@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: llama3-70b-vllm-inference-server
+      deployment: llama3-70b-vllm-deployment
   template:
     metadata:
       labels:
         app: llama3-70b-vllm-inference-server
+        deployment: llama3-70b-vllm-deployment
     spec:
       containers:
       - name: inference-server

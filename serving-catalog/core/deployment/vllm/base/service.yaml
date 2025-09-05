@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: vllm-server
+    deployment: vllm-deployment-blueprint
   type: ClusterIP
   ports:
     - protocol: TCP
