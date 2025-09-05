@@ -7,3 +7,4 @@ metadata:
 spec:
   selector:
     app: llama3-70b-vllm-inference-server
+    deployment: llama3-70b-vllm-deployment
