@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: llama3-8b-jetstream-inference-server
+      deployment: llama3-8b-jetstream-deployment
   template:
     metadata:
       labels:
         app: llama3-8b-jetstream-inference-server
+        deployment: llama3-8b-jetstream-deployment
     spec:
       containers:
       - name: inference-server

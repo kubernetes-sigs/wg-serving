@@ -6,10 +6,12 @@ spec:
   selector:
     matchLabels:
       app: vllm-server
+      deployment: vllm-deployment-blueprint
   template:
     metadata:
       labels:
         app: vllm-server
+        deployment: vllm-deployment-blueprint
     spec:
       containers:
       - name: inference-server

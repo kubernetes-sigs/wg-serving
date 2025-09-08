@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: gemma-7b-it-jetstream-inference-server
+      deployment: gemma-7b-it-jetstream-deployment
   template:
     metadata:
       labels:
         app: gemma-7b-it-jetstream-inference-server
+        deployment: gemma-7b-it-jetstream-deployment
     spec:
       containers:
       - name: inference-server

@@ -7,10 +7,12 @@ spec:
   selector:
     matchLabels:
       app: singlehost-inference-server
+      deployment: singlehost-inference-deployment-blueprint
   template:
     metadata:
       labels:
         app: singlehost-inference-server
+        deployment: singlehost-inference-deployment-blueprint
     spec:
       containers:
       - name: inference-server
