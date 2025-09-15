@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    metadata:
+      labels:
+        ai.aws.io/model: LLaMA3_8B
+        ai.aws.io/inference-server: vllm
+        examples.ai.aws.io/source: blueprints
