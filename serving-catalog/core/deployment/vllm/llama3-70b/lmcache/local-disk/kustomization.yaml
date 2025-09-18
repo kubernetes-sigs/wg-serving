@@ -1,0 +1,59 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../../lmcache
+
+patches:
+- options:
+    allowNameChange: true
+  path: deployment.patch.yaml
+  target:
+    kind: Deployment
+- options:
+    allowNameChange: true
+  path: service.patch.yaml
+  target:
+    kind: Service
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --tensor-parallel-size=8
+  target:
+    kind: Deployment
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/env/-
+      value: 
+        name: LMCACHE_MAX_LOCAL_CPU_SIZE
+        value: "128.0"
+    - op: add
+      path: /spec/template/spec/containers/0/env/-
+      value: 
+        name: LMCACHE_LOCAL_DISK
+        value: "file:///kv-store-disk/"
+    - op: add
+      path: /spec/template/spec/containers/0/env/-
+      value: 
+        name: LMCACHE_MAX_LOCAL_DISK_SIZE
+        value: "640.0"
+  target:
+    kind: Deployment
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/resources
+      value:
+        requests:
+          memory: 1024G
+          ephemeral-storage: 5120Gi
+  target:
+    kind: Deployment
+- patch: |-
+    - op: add
+      path: /spec/template/spec/volumes/-
+      value:
+        name: kv-store-disk
+        emptyDir: {}
+  target:
+    kind: Deployment

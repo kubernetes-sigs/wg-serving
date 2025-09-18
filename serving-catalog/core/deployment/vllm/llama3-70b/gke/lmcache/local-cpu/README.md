@@ -3,12 +3,12 @@
 ## Configuration
 | Kind | Model Server | Model | Provider | Accelerator |
 | --- | --- | --- | --- | --- |
-| Deployment | vLLM | llama3-70b | GKE | GPU L4 |
+| Deployment | vLLM | llama3-70b | GKE | GPU H100 80GB Mega |
 
 ## Usage
 
 The template can be deployed with the following commands:
 
 ```
-kustomize build core/deployment/vllm/llama3-70b/gke | kubectl apply -f -
+kustomize build core/deployment/vllm/llama3-70b/gke/lmcache/local-cpu| kubectl apply -f -
 ```
