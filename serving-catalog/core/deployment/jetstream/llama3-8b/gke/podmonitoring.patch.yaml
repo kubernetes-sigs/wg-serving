@@ -1,0 +1,14 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  labels:
+    app: llama3-8b-jetstream-inference-server
+  name: llama3-8b-jetstream-podmonitoring
+spec:
+  selector:
+    matchLabels:
+      app: llama3-8b-jetstream-inference-server
+  endpoints:
+  - interval: 15s
+    path: /
+    port: metrics

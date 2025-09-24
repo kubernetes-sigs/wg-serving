@@ -1,0 +1,14 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  labels:
+    app: gemma-7b-it-jetstream-inference-server
+  name: gemma-7b-it-jetstream-podmonitoring
+spec:
+  selector:
+    matchLabels:
+      app: gemma-7b-it-jetstream-inference-server
+  endpoints:
+  - interval: 15s
+    path: /
+    port: metrics

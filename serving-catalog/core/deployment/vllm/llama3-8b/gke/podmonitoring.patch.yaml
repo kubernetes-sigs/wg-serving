@@ -1,0 +1,14 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  labels:
+    app: llama3-8b-vllm-inference-server
+  name: llama3-8b-vllm-podmonitoring
+spec:
+  selector:
+    matchLabels:
+      app: llama3-8b-vllm-inference-server
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: metrics

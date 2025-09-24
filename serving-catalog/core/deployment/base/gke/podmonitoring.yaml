@@ -1,0 +1,19 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: podmonitoring
+  labels:
+    app: app-name
+spec:
+  selector:
+    matchLabels:
+      app: app-name
+  endpoints:
+  - interval: 15s
+    path: metric-path
+    port: metrics
+  targetLabels:
+    metadata:
+    - pod
+    - container
+    - node

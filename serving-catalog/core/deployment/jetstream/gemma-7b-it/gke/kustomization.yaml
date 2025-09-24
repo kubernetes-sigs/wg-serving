@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ../base
+  - ../../../base/gke
 
 components:
   - ../../../components/gke/resources/tpu/v5e-2x4
@@ -21,3 +22,8 @@ patches:
     path: hpa.patch.yaml
     target:
       kind: HorizontalPodAutoscaler
+  - options:
+      allowNameChange: true
+    path: podmonitoring.patch.yaml
+    target:
+      kind: PodMonitoring

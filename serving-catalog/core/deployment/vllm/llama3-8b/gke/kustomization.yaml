@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ../base
+  - ../../../base/gke
 
 components:
   - ../../../components/gke/resources/gpu/1-L4
@@ -18,3 +19,8 @@ patches:
     path: hpa.patch.yaml
     target:
       kind: HorizontalPodAutoscaler
+  - options:
+      allowNameChange: true
+    path: podmonitoring.patch.yaml
+    target:
+      kind: PodMonitoring
