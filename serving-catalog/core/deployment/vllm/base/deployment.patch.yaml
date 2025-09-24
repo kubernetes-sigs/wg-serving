@@ -35,6 +35,13 @@ spec:
             port: 8000
           failureThreshold: 60
           periodSeconds: 10
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            ai.gke.io/inference-server : vllm
+        maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
       volumes:
       - name: dshm
         emptyDir:
