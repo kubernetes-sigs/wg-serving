@@ -1,0 +1,24 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+components:
+- ../base
+
+patches:
+  - path: deployment.patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --tensor-parallel-size=8
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: remove
+        path: /spec/template/spec/containers/0/resources/requests/ephemeral-storage
+    target:
+      kind: Deployment
