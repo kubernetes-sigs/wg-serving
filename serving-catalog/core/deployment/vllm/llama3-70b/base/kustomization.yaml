@@ -18,12 +18,6 @@ patches:
     kind: Service
 - patch: |-
     - op: add
-      path: /spec/template/spec/containers/0/args/-
-      value: --tensor-parallel-size=8
-  target:
-    kind: Deployment
-- patch: |-
-    - op: add
       path: /spec/template/spec/containers/0/resources
       value:
         requests:

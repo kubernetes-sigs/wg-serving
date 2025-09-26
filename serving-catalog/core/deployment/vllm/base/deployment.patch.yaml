@@ -22,6 +22,7 @@ spec:
             name: metrics
         args:
         - --model=$(MODEL_ID)
+        - --tensor-parallel-size=$(TENSOR_PARALLEL_SIZE)
         env:
         - name: HUGGING_FACE_HUB_TOKEN
           valueFrom:
