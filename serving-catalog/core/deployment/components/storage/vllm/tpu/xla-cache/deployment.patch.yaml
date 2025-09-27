@@ -10,3 +10,10 @@ spec:
         env:
         - name: VLLM_XLA_CACHE_PATH
           value: "/data"
+        volumeMounts:
+        - name: model-data
+          mountPath: /data/models
+      volumes:
+      - name: model-data
+        persistentVolumeClaim:
+          claimName: PVC_NAME

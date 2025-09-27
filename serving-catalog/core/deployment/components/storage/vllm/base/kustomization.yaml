@@ -9,13 +9,13 @@ patches:
       version: v1
       kind: Deployment
   - patch: |-
-      - op: replace
+      - op: add
         path: /spec/template/spec/containers/0/args/-
         value: --model=/data/models/$(MODEL_PATH)
     target:
       kind: Deployment
   - patch: |-
-      - op: replace
+      - op: add
         path: /spec/template/spec/containers/0/args/-
         value: --download-dir=/data/models
     target:
