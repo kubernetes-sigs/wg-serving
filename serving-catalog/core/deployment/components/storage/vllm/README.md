@@ -9,3 +9,4 @@ Current storage component supports the following storage systems:
 - GCSFuse
     - This configuration expects a pre-existing GCSFuse backed PVC (eg: model-pvc)
     - This configuration will require user to manually add/replace MODEL_PATH value with actual GCS model path.
+    - To change file cache from LSSD to RAM, Use the `gcsfuse-ram-cache` component.
