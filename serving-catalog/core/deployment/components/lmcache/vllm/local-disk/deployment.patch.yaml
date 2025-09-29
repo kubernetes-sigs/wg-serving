@@ -13,11 +13,11 @@ spec:
         - name: LMCACHE_LOCAL_DISK
           value: "file:///kv-store-disk/"
         - name: LMCACHE_MAX_LOCAL_DISK_SIZE
-          value: "640.0"
+          value: "576.0"
         resources:
           requests:
             memory: 1024G
-            ephemeral-storage: 5120Gi
+            ephemeral-storage: 4608Gi
       volumes:
       - name: kv-store-disk
         emptyDir: {}

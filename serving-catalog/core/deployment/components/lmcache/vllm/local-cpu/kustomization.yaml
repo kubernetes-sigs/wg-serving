@@ -11,8 +11,3 @@ patches:
       group: apps
       version: v1
       kind: Deployment
-  - patch: |-
-      - op: remove
-        path: /spec/template/spec/containers/0/resources/requests/ephemeral-storage
-    target:
-      kind: Deployment
