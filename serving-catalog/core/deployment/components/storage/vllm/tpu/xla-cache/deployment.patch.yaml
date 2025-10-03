@@ -9,7 +9,7 @@ spec:
       - name: inference-server
         env:
         - name: VLLM_XLA_CACHE_PATH
-          value: "/data"
+          value: "/data/models"
         volumeMounts:
         - name: model-data
           mountPath: /data/models
