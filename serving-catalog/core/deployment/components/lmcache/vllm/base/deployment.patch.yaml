@@ -18,4 +18,4 @@ spec:
         - "--kv-transfer-config"
         - '{"kv_connector":"LMCacheConnectorV1","kv_role":"kv_both"}'
         - "--enable_prefix_caching"
-        - "--tensor-parallel-size=8"
+        - "--tensor-parallel-size=$(TENSOR_PARALLEL_SIZE)"
