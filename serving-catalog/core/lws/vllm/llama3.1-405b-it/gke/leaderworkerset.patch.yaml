@@ -10,6 +10,8 @@ spec:
         labels:
           ai.gke.io/model: llama3-1-405b-it
           examples.ai.gke.io/source: blueprints
+          role: leader
+          deployment: vllm-multihost-base
     workerTemplate:
       metadata:
         labels:

@@ -7,3 +7,4 @@ metadata:
 spec:
   selector:
     app: llama3-8b-jetstream-inference-server
+    deployment: llama3-8b-jetstream-deployment

@@ -6,6 +6,9 @@ spec:
   leaderWorkerTemplate:
     restartPolicy: RecreateGroupOnPodRestart
     leaderTemplate:
+      metadata:
+        labels:
+          deployment: vllm-multihost-base
       spec:
         containers:
           - name: inference-server-leader
