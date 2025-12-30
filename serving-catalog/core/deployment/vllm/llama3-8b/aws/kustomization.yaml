@@ -29,3 +29,4 @@ patches:
         path: /spec/template/spec/nodeSelector
         value:
           eks.amazonaws.com/compute-type: auto
+          eks.amazonaws.com/instance-family: g6

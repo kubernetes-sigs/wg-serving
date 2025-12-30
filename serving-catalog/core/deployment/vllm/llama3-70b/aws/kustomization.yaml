@@ -6,7 +6,7 @@ resources:
   - ../base
 
 components:
-  - ../../../components/aws/resources/gpu/8-L4
+  - ../../../components/aws/resources/gpu/4-H100-80GB
   # - ../../../components/hpa/vllm/token-latency # HPA is a work-in-progress
 
 patches:
