@@ -47,7 +47,7 @@ spec:
                 port: 8080
               initialDelaySeconds: 15
               periodSeconds: 10
-              failureThreshold: 600
+              failureThreshold: 60
             ports:
               - containerPort: 8080
                 name: metrics
