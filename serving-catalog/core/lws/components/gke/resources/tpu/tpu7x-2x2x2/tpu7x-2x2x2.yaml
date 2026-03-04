@@ -34,6 +34,13 @@
   value: 
     name: JAX_PLATFORMS
     value: ""
+- op: replace # overwrite command since the executable is in a different directory for tpu
+  path: /spec/leaderWorkerTemplate/leaderTemplate/spec/containers/0/command
+  value: 
+    - sh
+    - -c
+    - "bash /workspace/vllm/examples/online_serving/multi-node-serving.sh leader --ray_cluster_size=$(LWS_GROUP_SIZE); 
+      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $(MODEL_ID) --tensor-parallel-size $(TENSOR_PARALLEL_SIZE) --pipeline_parallel_size $(PIPELINE_PARALLEL_SIZE)"
 
 # Worker
 - op: copy
@@ -57,3 +64,10 @@
   value: 
     name: JAX_PLATFORMS
     value: ""
+- op: replace # overwrite command since the executable is in a different directory for tpu
+  path: /spec/leaderWorkerTemplate/workerTemplate/spec/containers/0/command
+  value: 
+    - sh
+    - -c
+    - bash /workspace/vllm/examples/online_serving/multi-node-serving.sh worker
+      --ray_address=$(LWS_LEADER_ADDRESS)
