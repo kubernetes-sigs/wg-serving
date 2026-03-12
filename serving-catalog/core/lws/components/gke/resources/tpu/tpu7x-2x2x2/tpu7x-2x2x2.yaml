@@ -4,6 +4,9 @@
   value:
     cloud.google.com/gke-tpu-topology: 2x2x2
     cloud.google.com/gke-tpu-accelerator: tpu7x
+- op: replace
+  path: /spec/leaderWorkerTemplate/leaderTemplate/spec/containers/0/image
+  value: vllm/vllm-tpu:nightly
 - op: add
   path: /spec/leaderWorkerTemplate/leaderTemplate/spec/containers/0/resources
   value:
@@ -40,9 +43,12 @@
     - sh
     - -c
     - "bash /workspace/vllm/examples/online_serving/multi-node-serving.sh leader --ray_cluster_size=$(LWS_GROUP_SIZE); 
-      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $(MODEL_ID) --tensor-parallel-size $(TENSOR_PARALLEL_SIZE) --pipeline_parallel_size $(PIPELINE_PARALLEL_SIZE)"
+      python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $(MODEL_ID) --tensor-parallel-size $(TENSOR_PARALLEL_SIZE) --pipeline_parallel_size $(PIPELINE_PARALLEL_SIZE)
 
 # Worker
+- op: replace
+  path: /spec/leaderWorkerTemplate/workerTemplate/spec/containers/0/image
+  value: vllm/vllm-tpu:nightly
 - op: copy
   from: /spec/leaderWorkerTemplate/leaderTemplate/spec/nodeSelector
   path: /spec/leaderWorkerTemplate/workerTemplate/spec/nodeSelector
