@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    metadata:
+      labels:
+        ai.azure.io/model: LLaMA3_8B
+        ai.azure.io/inference-server: vllm
+        examples.ai.azure.io/source: blueprints
