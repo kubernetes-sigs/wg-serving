@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/compute-type: auto
+        eks.amazonaws.com/instance-family: p5
+      containers:
+      - name: inference-server
+        resources:
+          requests:
+            nvidia.com/gpu: 4
+          limits:
+            nvidia.com/gpu: 4
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
