@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/instance-family: trn2
+        eks.amazonaws.com/compute-type: auto
+        node.kubernetes.io/instance-type: trn2.48xlarge
+      tolerations:
+        - key: aws.amazon.com/neuron
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: inference-server
+          resources:
+            requests:
+              aws.amazon.com/neuron: 16
+            limits:
+              aws.amazon.com/neuron: 16

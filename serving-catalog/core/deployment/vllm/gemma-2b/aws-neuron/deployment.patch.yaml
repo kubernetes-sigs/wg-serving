@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    metadata:
+      labels:
+        ai.aws.com/model: gemma-2b
+        ai.aws.com/inference-server: vllm
+        examples.ai.aws.com/source: blueprints
