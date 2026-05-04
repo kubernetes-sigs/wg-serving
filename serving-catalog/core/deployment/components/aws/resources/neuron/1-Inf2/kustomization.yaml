@@ -13,6 +13,7 @@ patches:
         path: /spec/template/spec/containers/0/env/-
         value:
           name: TENSOR_PARALLEL_SIZE
-          value: "1"
+          # 1 Inferentia2 chip = 2 NeuronCores; vLLM-Neuron uses tp_size = #cores.
+          value: "2"
     target:
       kind: Deployment

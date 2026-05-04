@@ -1,0 +1,21 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+
+components:
+  - ../../../components/aws/resources/neuron/1-Inf2
+  - ../../../components/storage/vllm/aws/s3
+  # - ../../../components/hpa/vllm/token-latency # HPA is a work-in-progress
+
+patches:
+  - path: deployment.patch.yaml
+    target:
+      kind: Deployment
+  - options:
+      allowNameChange: true
+    path: hpa.patch.yaml
+    target:
+      kind: HorizontalPodAutoscaler
