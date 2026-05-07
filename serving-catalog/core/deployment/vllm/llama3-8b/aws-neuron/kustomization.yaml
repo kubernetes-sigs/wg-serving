@@ -11,6 +11,15 @@ components:
   # - ../../../components/hpa/vllm/token-latency # HPA is a work-in-progress
 
 patches:
+  # vLLM 0.13+ on Neuron: ModelConfig requires an explicit max sequence length.
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --max-model-len=8192
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
   - path: deployment.patch.yaml
     target:
       kind: Deployment
