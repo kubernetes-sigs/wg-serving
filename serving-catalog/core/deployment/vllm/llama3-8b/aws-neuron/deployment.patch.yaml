@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: '*'
 spec:
+  # First Neuron compile often exceeds 10m; default 600s yields ProgressDeadlineExceeded.
+  progressDeadlineSeconds: 7200
   template:
     metadata:
       labels:
@@ -17,16 +19,25 @@ spec:
       containers:
         - name: inference-server
           env:
+            # Override 1-Inf2 default (TP=2): single-core compile/serve to cut RAM / HLO size.
+            - name: TENSOR_PARALLEL_SIZE
+              value: "1"
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts
           resources:
+            # inf2.8xlarge ~128 GiB host RAM; compile can exceed 100Gi (OOM seen at 100Gi limit).
             requests:
-              memory: "80Gi"
+              memory: "104Gi"
             limits:
-              memory: "100Gi"
+              memory: "120Gi"
           volumeMounts:
             - name: neuron-compiled-artifacts
               mountPath: /var/cache/neuron-compiled-artifacts
       volumes:
         - name: neuron-compiled-artifacts
           emptyDir: {}
+        # Cap /dev/shm tmpfs; it counts against the same memory limit as the process.
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi

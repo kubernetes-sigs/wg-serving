@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: '*'
 spec:
+  progressDeadlineSeconds: 7200
   template:
     metadata:
       labels:
@@ -17,16 +18,22 @@ spec:
       containers:
         - name: inference-server
           env:
+            - name: TENSOR_PARALLEL_SIZE
+              value: "1"
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts
           resources:
             requests:
-              memory: "80Gi"
+              memory: "104Gi"
             limits:
-              memory: "100Gi"
+              memory: "120Gi"
           volumeMounts:
             - name: neuron-compiled-artifacts
               mountPath: /var/cache/neuron-compiled-artifacts
       volumes:
         - name: neuron-compiled-artifacts
           emptyDir: {}
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi
