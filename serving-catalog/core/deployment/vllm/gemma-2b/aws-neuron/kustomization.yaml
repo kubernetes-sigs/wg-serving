@@ -20,6 +20,15 @@ patches:
       group: apps
       version: v1
       kind: Deployment
+  # vLLM 0.13 defaults prefix caching on; Neuron path hits block_size assertion without it.
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --no-enable-prefix-caching
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
   - path: deployment.patch.yaml
     target:
       kind: Deployment

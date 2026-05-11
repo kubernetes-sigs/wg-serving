@@ -9,3 +9,14 @@ spec:
         ai.aws.com/model: llama3-8b
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
+    spec:
+      # Mountpoint S3 is read-only; Neuron writes compiled graphs next to weights unless overridden.
+      # Shadow this subpath with emptyDir (must match extra_deployment_args model-path + suffix).
+      containers:
+        - name: inference-server
+          volumeMounts:
+            - name: neuron-compiled-artifacts
+              mountPath: /data/models/vllm_models/llama3-8b/neuron-compiled-artifacts
+      volumes:
+        - name: neuron-compiled-artifacts
+          emptyDir: {}

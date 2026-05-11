@@ -9,3 +9,12 @@ spec:
         ai.aws.com/model: gemma-2b
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
+    spec:
+      containers:
+        - name: inference-server
+          volumeMounts:
+            - name: neuron-compiled-artifacts
+              mountPath: /data/models/vllm_models/gemma-2b/neuron-compiled-artifacts
+      volumes:
+        - name: neuron-compiled-artifacts
+          emptyDir: {}

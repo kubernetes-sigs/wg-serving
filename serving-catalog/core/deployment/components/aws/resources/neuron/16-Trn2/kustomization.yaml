@@ -1,4 +1,6 @@
 # kustomization.yaml
+# trn2.48xlarge: 16 Trainium2 accelerators (AWS EC2 Trn2 table). TP follows chip count here;
+# Inf2 components use NeuronCore-based TP — see 1-Inf2 / 12-Inf2 comments.
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 

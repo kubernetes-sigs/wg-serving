@@ -1,3 +1,5 @@
+# inf2.48xlarge: 12 Inferentia2 chips per AWS Inf2 instance-types table.
+# K8s extended resource aws.amazon.com/neuron counts chips on the node.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +19,6 @@ spec:
         - name: inference-server
           resources:
             requests:
-              aws.amazon.com/neuron: 8
+              aws.amazon.com/neuron: 12
             limits:
-              aws.amazon.com/neuron: 8
+              aws.amazon.com/neuron: 12
