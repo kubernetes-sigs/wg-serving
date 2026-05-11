@@ -10,11 +10,23 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
+      # Same as llama3-8b aws-neuron: enough host RAM + explicit Inf2 SKU for compile/serving.
+      nodeSelector:
+        node.kubernetes.io/instance-type: inf2.8xlarge
+      # Mountpoint S3 mounts /data/models read-only; Neuron compile cache must live outside that tree.
       containers:
         - name: inference-server
+          env:
+            - name: NEURON_COMPILED_ARTIFACTS
+              value: /var/cache/neuron-compiled-artifacts
+          resources:
+            requests:
+              memory: "80Gi"
+            limits:
+              memory: "100Gi"
           volumeMounts:
             - name: neuron-compiled-artifacts
-              mountPath: /data/models/vllm_models/gemma-2b/neuron-compiled-artifacts
+              mountPath: /var/cache/neuron-compiled-artifacts
       volumes:
         - name: neuron-compiled-artifacts
           emptyDir: {}
