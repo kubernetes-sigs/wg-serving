@@ -12,9 +12,9 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
-      # Pin host DRAM for Neuron compile: inf2.xlarge (~16 GiB) is too small; use 8xlarge.
+      # Pin host DRAM for Neuron compile: peaks can approach ~180 GiB RAM; inf2.24xlarge (~384 GiB).
       nodeSelector:
-        node.kubernetes.io/instance-type: inf2.8xlarge
+        node.kubernetes.io/instance-type: inf2.24xlarge
       # Mountpoint S3 mounts /data/models read-only; Neuron compile cache must live outside that tree.
       containers:
         - name: inference-server
@@ -25,19 +25,14 @@ spec:
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts
           resources:
-            # inf2.8xlarge ~128 GiB host RAM; compile can exceed 100Gi (OOM seen at 100Gi limit).
+            # inf2.24xlarge ~384 GiB; first compile can spike ~180 GiB+ — request/limit headroom under allocatable.
             requests:
-              memory: "104Gi"
+              memory: "250Gi"
             limits:
-              memory: "120Gi"
+              memory: "300Gi"
           volumeMounts:
             - name: neuron-compiled-artifacts
               mountPath: /var/cache/neuron-compiled-artifacts
       volumes:
         - name: neuron-compiled-artifacts
           emptyDir: {}
-        # Cap /dev/shm tmpfs; it counts against the same memory limit as the process.
-        - name: dshm
-          emptyDir:
-            medium: Memory
-            sizeLimit: 16Gi
