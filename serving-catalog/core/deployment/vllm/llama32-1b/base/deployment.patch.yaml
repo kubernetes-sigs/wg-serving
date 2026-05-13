@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: llama32-1b-vllm-inference-server
+  name: llama32-1b-vllm-deployment
+spec:
+  selector:
+    matchLabels:
+      app: llama32-1b-vllm-inference-server
+      deployment: llama32-1b-vllm-deployment
+  template:
+    metadata:
+      labels:
+        app: llama32-1b-vllm-inference-server
+        deployment: llama32-1b-vllm-deployment
+    spec:
+      containers:
+      - name: inference-server
+        env:
+          - name: MODEL_ID
+            value: meta-llama/Llama-3.2-1B

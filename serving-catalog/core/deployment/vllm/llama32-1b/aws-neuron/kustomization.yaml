@@ -1,0 +1,35 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+
+components:
+  - ../../../components/aws/resources/neuron/1-Inf2
+  - ../../../components/storage/vllm/aws/s3
+  # - ../../../components/hpa/vllm/token-latency # HPA is a work-in-progress
+
+patches:
+  # vLLM 0.13+ on Neuron: ModelConfig requires an explicit max sequence length.
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --max-model-len=2048
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+  # vLLM 0.13 defaults prefix caching on; Neuron path hits:
+  # "When prefix caching is enabled, block_size must be set" without block_size.
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --no-enable-prefix-caching
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+  - path: deployment.patch.yaml
+    target:
+      kind: Deployment
