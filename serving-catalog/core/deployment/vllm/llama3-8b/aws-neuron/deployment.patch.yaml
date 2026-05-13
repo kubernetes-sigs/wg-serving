@@ -19,9 +19,16 @@ spec:
       containers:
         - name: inference-server
           env:
-            # Override 1-Inf2 default (TP=2): single-core compile/serve to cut RAM / HLO size.
-            - name: TENSOR_PARALLEL_SIZE
-              value: "1"
+            # TENSOR_PARALLEL_SIZE is intentionally NOT overridden here.
+            # 1-Inf2 component sets TP=2 (= 2 NeuronCores per chip), which is the minimum
+            # valid configuration for Inferentia2: neuronx-cc requires --lnc>=2 for inf2
+            # because both NeuronCores of a chip must be compiled together. TP=1 (--lnc=1)
+            # causes neuronx-cc to exit 70 immediately on inf2.24xlarge.
+            - name: VLLM_USE_V1
+              # Disable vLLM v1 engine for Neuron: the base storage component sets this to "1"
+              # (GPU default), but v1 activates CompilationMode.VLLM_COMPILE (inductor/GPU path).
+              # Neuron platform plugin overrides parts of it, but v0 engine is the stable path.
+              value: "0"
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts
           resources:
