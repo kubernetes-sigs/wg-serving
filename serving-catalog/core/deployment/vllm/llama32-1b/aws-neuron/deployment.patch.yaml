@@ -12,8 +12,6 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
-      # Llama-3.2-1B (~2 GB weights): tracing peak ~20-40 GiB → fits inf2.8xlarge (128 GiB RAM).
-      # inf2.8xlarge: 1 chip, 32 GB accelerator, much better capacity than inf2.24xlarge.
       nodeSelector:
         node.kubernetes.io/instance-type: inf2.8xlarge
       # Mountpoint S3 mounts /data/models read-only; Neuron compile cache must live outside that tree.

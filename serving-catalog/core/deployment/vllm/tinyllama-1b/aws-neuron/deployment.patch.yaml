@@ -11,17 +11,11 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
-      # TinyLlama-1.1B: standard LlamaForCausalLM, no "llama3" rope_type.
-      # 4 KV heads, 22 layers → KV cache ~11 GB with batch=256, seq=2048 → fits in 16 GB HBM.
-      # inf2.8xlarge: 1 chip (lnc=1, 16 GB HBM), TP=2 from 1-Inf2 component.
       nodeSelector:
         node.kubernetes.io/instance-type: inf2.8xlarge
       containers:
         - name: inference-server
           env:
-            # TENSOR_PARALLEL_SIZE is NOT overridden: 1-Inf2 component sets TP=2.
-            # TinyLlama has 4 KV heads; GQA.CONVERT_TO_MHA applies but compiles cleanly
-            # without the "llama3" rope_type AffineIV bug (NCC_ITEN404) seen in Llama-3.2.
             - name: VLLM_USE_V1
               value: "0"
             - name: NEURON_COMPILED_ARTIFACTS
