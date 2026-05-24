@@ -11,20 +11,12 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
-      # gemma-2b (~4 GB weights): tracing peak ~40-60 GiB → fits inf2.8xlarge (128 GiB RAM).
-      # inf2.8xlarge has much better capacity availability than inf2.24xlarge.
       nodeSelector:
         node.kubernetes.io/instance-type: inf2.8xlarge
-      # Mountpoint S3 mounts /data/models read-only; Neuron compile cache must live outside that tree.
       containers:
         - name: inference-server
           env:
-            # TENSOR_PARALLEL_SIZE is intentionally NOT overridden here.
-            # 1-Inf2 component sets TP=2 (= 2 NeuronCores per chip), which is the minimum
-            # valid configuration for Inferentia2: neuronx-cc requires --lnc>=2 for inf2.
             - name: VLLM_USE_V1
-              # Disable vLLM v1 engine for Neuron: the base storage component sets this to "1"
-              # (GPU default), but v1 activates CompilationMode.VLLM_COMPILE (inductor/GPU path).
               value: "0"
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts

@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: '*'
 spec:
-  # First Neuron compile often exceeds 10m; default 600s yields ProgressDeadlineExceeded.
   progressDeadlineSeconds: 7200
   template:
     metadata:
@@ -12,27 +11,16 @@ spec:
         ai.aws.com/inference-server: vllm
         examples.ai.aws.com/source: blueprints
     spec:
-      # Pin host DRAM for Neuron compile: peaks can approach ~180 GiB RAM; inf2.24xlarge (~384 GiB).
       nodeSelector:
         node.kubernetes.io/instance-type: inf2.24xlarge
-      # Mountpoint S3 mounts /data/models read-only; Neuron compile cache must live outside that tree.
       containers:
         - name: inference-server
           env:
-            # TENSOR_PARALLEL_SIZE is intentionally NOT overridden here.
-            # 1-Inf2 component sets TP=2 (= 2 NeuronCores per chip), which is the minimum
-            # valid configuration for Inferentia2: neuronx-cc requires --lnc>=2 for inf2
-            # because both NeuronCores of a chip must be compiled together. TP=1 (--lnc=1)
-            # causes neuronx-cc to exit 70 immediately on inf2.24xlarge.
             - name: VLLM_USE_V1
-              # Disable vLLM v1 engine for Neuron: the base storage component sets this to "1"
-              # (GPU default), but v1 activates CompilationMode.VLLM_COMPILE (inductor/GPU path).
-              # Neuron platform plugin overrides parts of it, but v0 engine is the stable path.
               value: "0"
             - name: NEURON_COMPILED_ARTIFACTS
               value: /var/cache/neuron-compiled-artifacts
           resources:
-            # inf2.24xlarge ~384 GiB; first compile can spike ~180 GiB+ — request/limit headroom under allocatable.
             requests:
               memory: "250Gi"
             limits:
