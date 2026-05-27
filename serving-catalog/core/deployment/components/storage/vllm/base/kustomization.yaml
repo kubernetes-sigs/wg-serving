@@ -8,9 +8,10 @@ patches:
       group: apps
       version: v1
       kind: Deployment
+  # Replace base --model=$(MODEL_ID); do not append a second --model (vLLM warns).
   - patch: |-
-      - op: add
-        path: /spec/template/spec/containers/0/args/-
+      - op: replace
+        path: /spec/template/spec/containers/0/args/0
         value: --model=/data/models/$(MODEL_PATH)
     target:
       kind: Deployment

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  progressDeadlineSeconds: 7200
+  template:
+    metadata:
+      labels:
+        ai.aws.com/model: gemma-2b
+        ai.aws.com/inference-server: vllm
+        examples.ai.aws.com/source: blueprints
+    spec:
+      nodeSelector:
+        node.kubernetes.io/instance-type: inf2.8xlarge
+      containers:
+        - name: inference-server
+          env:
+            - name: VLLM_USE_V1
+              value: "0"
+            - name: NEURON_COMPILED_ARTIFACTS
+              value: /var/cache/neuron-compiled-artifacts
+          resources:
+            requests:
+              memory: "60Gi"
+            limits:
+              memory: "80Gi"
+          volumeMounts:
+            - name: neuron-compiled-artifacts
+              mountPath: /var/cache/neuron-compiled-artifacts
+      volumes:
+        - name: neuron-compiled-artifacts
+          emptyDir: {}

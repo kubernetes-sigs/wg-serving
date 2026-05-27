@@ -1,0 +1,10 @@
+# kustomization.yaml
+# Mounts the model data from an S3 bucket via the AWS Mountpoint for Amazon S3
+# CSI driver. The Deployment volumeMount/volume are defined in the shared base
+# component; the PVC name (claimName) is substituted by the serving-catalog CLI
+# via --pvc-name=<name> at generation time (typically s3-csi-static-pvc).
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+components:
+  - ../../base
