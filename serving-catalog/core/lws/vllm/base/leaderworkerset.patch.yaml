@@ -17,7 +17,13 @@ spec:
             - sh
             - -c
             - "bash /vllm-workspace/examples/online_serving/multi-node-serving.sh leader --ray_cluster_size=$(LWS_GROUP_SIZE); 
-              python3 -m vllm.entrypoints.openai.api_server --port 8080 --model $(MODEL_ID) --tensor-parallel-size $(TENSOR_PARALLEL_SIZE) --pipeline_parallel_size $(PIPELINE_PARALLEL_SIZE)"
+              python3 -m vllm.entrypoints.openai.api_server \"$@\""
+            - "--"
+            args:
+            - "--port=8080"
+            - "--model=$(MODEL_ID)"
+            - "--tensor-parallel-size=$(TENSOR_PARALLEL_SIZE)"
+            - "--pipeline_parallel_size=$(PIPELINE_PARALLEL_SIZE)"
             env:
             - name: HUGGING_FACE_HUB_TOKEN
               valueFrom:
