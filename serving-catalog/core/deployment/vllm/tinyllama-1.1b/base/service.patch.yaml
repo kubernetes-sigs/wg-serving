@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tinyllama-1.1b-vllm-service
+  name: tinyllama-1b-vllm-service
   labels:
-    app: tinyllama-1.1b-vllm-inference-server
+    app: tinyllama-1b-vllm-inference-server
 spec:
   selector:
-    app: tinyllama-1.1b-vllm-inference-server
-    deployment: tinyllama-1.1b-vllm-deployment
+    app: tinyllama-1b-vllm-inference-server
+    deployment: tinyllama-1b-vllm-deployment

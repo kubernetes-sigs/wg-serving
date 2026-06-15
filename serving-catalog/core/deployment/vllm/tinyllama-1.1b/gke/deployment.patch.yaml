@@ -6,6 +6,6 @@ spec:
   template:
     metadata:
       labels:
-        ai.gke.io/model: tinyllama-1.1b
+        ai.gke.io/model: tinyllama-1b
         ai.gke.io/inference-server: vllm
         examples.ai.gke.io/source: blueprints
