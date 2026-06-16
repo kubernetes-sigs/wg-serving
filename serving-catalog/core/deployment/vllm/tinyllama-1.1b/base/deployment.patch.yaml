@@ -19,4 +19,4 @@ spec:
       - name: inference-server
         env:
           - name: MODEL_ID
-            value: TinyLlama/TinyLlama-1b-Chat-v1.0
+            value: 'TinyLlama/TinyLlama-1.1b-Chat-v1.0'
